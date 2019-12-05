@@ -1,0 +1,38 @@
+{% extends 'master.html' %}
+
+{% block conteudo %}
+
+<h2>Lista de usuários</h2>
+
+{{ message('message') }}
+
+<table class="table table-borderless table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.phone }}</td>
+            <td class="d-flex">
+                <a href="/user/edit/{{ user.id }}"  class="btn btn-sm btn-success mr-2">Editar</a>
+                <form action="/user/delete/{{ user.id }}" method="post">
+                    <input type="hidden" name="_METHOD" value="DELETE" readonly>
+                    <button type="submit" class="btn btn-sm btn-danger">Deletar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
